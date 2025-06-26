@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RegisterApplication {
 
 	public static void main(String[] args) {
+		System.out.println("register working ");
 		SpringApplication.run(RegisterApplication.class, args);
 	}
 
