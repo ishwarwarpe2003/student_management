@@ -1,0 +1,81 @@
+<div style="padding: 20px;">
+  <h2>Student List</h2>
+
+  <!-- Dashboard Controls -->
+  <div class="dashboard-controls" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 20px;">
+    
+    <!-- Search Input -->
+    <mat-form-field appearance="fill" style="max-width: 300px;">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search students..." (keyup)="applyFilter($event)">
+    </mat-form-field>
+
+    <!-- Total Students -->
+    <div class="dashboard-card" style="background-color: #e3f2fd; padding: 10px 20px; border-radius: 8px; text-align: center;">
+      <h3 style="margin: 0;">{{ totalStudents }}</h3>
+      <p style="margin: 0;">Total Students</p>
+    </div>
+
+    <!-- Average Marks -->
+    <div class="dashboard-card" style="background-color: #f1f8e9; padding: 10px 20px; border-radius: 8px; text-align: center;">
+      <h3 style="margin: 0;">{{ averageMarks }}</h3>
+      <p style="margin: 0;">Average Marks</p>
+    </div>
+  </div>
+
+  <!-- Data Table -->
+  <table mat-table [dataSource]="students" matSort class="mat-elevation-z8" style="width: 100%; margin-top: 20px;">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let student">
+        <span [innerHTML]="highlight(student.name)"></span>
+      </td>
+    </ng-container>
+
+    <!-- Roll Column -->
+    <ng-container matColumnDef="roll">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Roll </th>
+      <td mat-cell *matCellDef="let student">
+        <span [innerHTML]="highlight(student.roll.toString())"></span>
+      </td>
+    </ng-container>
+
+    <!-- Marks Column -->
+    <ng-container matColumnDef="marks">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Marks </th>
+      <td mat-cell *matCellDef="let student">
+        <span [innerHTML]="highlight(student.marks.toString())"></span>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let student">
+        <button mat-button color="accent" (click)="editStudent(student.id)">Edit</button>
+        <button mat-button color="warn" (click)="deleteStudent(student.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <!-- Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- No Data Message -->
+  <div *ngIf="students.data.length === 0 && !students.filter" style="text-align: center; margin-top: 40px;">
+    <p style="font-size: 18px; color: gray;">😕 No students found.</p>
+  </div>
+
+  <!-- No Filtered Results Message -->
+  <div *ngIf="students.filteredData.length === 0 && students.filter" style="text-align: center; margin-top: 40px;">
+    <p style="font-size: 18px; color: gray;">
+      🔍 No results for "<strong>{{ students.filter }}</strong>"
+    </p>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

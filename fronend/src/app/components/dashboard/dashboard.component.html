@@ -1,0 +1,66 @@
+<div style="padding: 40px; max-width: 900px; margin: auto;">
+  <h1 style="text-align: center; margin-bottom: 40px;">🎓 Student Management Dashboard</h1>
+
+  <!-- Stats Cards -->
+  <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;">
+    <div style="flex: 1; min-width: 200px; background-color: #e3f2fd; padding: 20px; border-radius: 10px; text-align: center;">
+      <h2 style="margin: 0;">👥 Total Students</h2>
+      <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">{{ totalStudents }}</p>
+    </div>
+
+    <div style="flex: 1; min-width: 200px; background-color: #f1f8e9; padding: 20px; border-radius: 10px; text-align: center;">
+      <h2 style="margin: 0;">📊 Average Marks</h2>
+      <p style="font-size: 24px; font-weight: bold; margin: 10px 0;">{{ averageMarks }}</p>
+    </div>
+  </div>
+
+  <!-- Filter Dropdown -->
+  <div style="margin-bottom: 30px; text-align: center;">
+    <mat-form-field appearance="fill" style="width: 300px;">
+      <mat-label>📂 Filter by Marks</mat-label>
+      <mat-select [(value)]="selectedMarksFilter" (selectionChange)="filterByMarks($event.value)">
+        <mat-option value="">All Students</mat-option>
+        <mat-option value="above75">Above 75</mat-option>
+        <mat-option value="between50to75">Between 50 to 75</mat-option>
+        <mat-option value="below50">Below 50</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Filtered Student List -->
+  <div *ngIf="filteredStudents.length > 0" style="margin-bottom: 40px;">
+    <h3 style="text-align: center;">🧾 Filtered Students ({{ filteredStudents.length }})</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;" border="1">
+      <thead>
+        <tr style="background-color: #eeeeee;">
+          <th style="padding: 8px;">Name</th>
+          <th style="padding: 8px;">Roll</th>
+          <th style="padding: 8px;">Marks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents">
+          <td style="padding: 8px;">{{ student.name }}</td>
+          <td style="padding: 8px;">{{ student.roll }}</td>
+          <td style="padding: 8px;">{{ student.marks }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Empty message if no students match filter -->
+  <div *ngIf="selectedMarksFilter && filteredStudents.length === 0" style="text-align: center; margin-top: 20px;">
+    <p style="color: gray;">😕 No students found for the selected filter.</p>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div style="text-align: center;">
+    <button mat-raised-button color="primary" (click)="goToAddStudent()">
+      ➕ Add Student
+    </button>
+    
+    <button mat-raised-button color="accent" (click)="goToStudentList()" style="margin-left: 20px;">
+      📋 View All Students
+    </button>
+  </div>
+</div>

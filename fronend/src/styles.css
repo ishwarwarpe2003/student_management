@@ -1,0 +1,92 @@
+/* Global page styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+/* Toolbar spacing */
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Toolbar brand */
+.brand {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Centered card-like form */
+form {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Material form fields full width */
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Material button styling */
+button[mat-raised-button] {
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* Table styling */
+table {
+  width: 90%;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mat-elevation-z8 {
+  border-radius: 12px;
+}
+
+/* Footer */
+footer {
+  margin-top: 30px;
+  padding: 12px;
+  text-align: center;
+  background-color: #1976d2;
+  color: white;
+}
+
+/* Responsive padding */
+@media (max-width: 600px) {
+  form, table {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .brand {
+    font-size: 18px;
+  }
+}
+.snack-success {
+  background-color: #4caf50;
+  color: white;
+}
+
+.snack-error {
+  background-color: #f44336;
+  color: white;
+}
+
+
